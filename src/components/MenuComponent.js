@@ -4,12 +4,10 @@ import DishdetailComponent from './DishdetailComponent';
 
 export default function Menu (props) {
 
-    const [state, setState] = useState({
-        selectedDish: null
-    });
+    const [selectedDish, setSelectedDish] = useState(null);
 
     const onDishSelect = (dish) => {
-        setState({ selectedDish: dish });
+        setSelectedDish(dish);
     }
 
     const menu = props.dishes.map((dish) => {
@@ -31,7 +29,7 @@ export default function Menu (props) {
             <div className="row">
                 {menu}
             </div>
-            <DishdetailComponent selectedDish={state.selectedDish} />
+            <DishdetailComponent selectedDish={selectedDish} />
         </div>
     );
 }
