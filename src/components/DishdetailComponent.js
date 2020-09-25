@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import React from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 export default function DishdetailComponent (props) {
 
@@ -20,14 +20,18 @@ export default function DishdetailComponent (props) {
             );
     }
 
-    const renderComments = (dish) => {
+    const RenderComments = (props) => {
+        const dish = props.dish;
         if (dish != null)
             return(
                 dish.comments.map(comment => {
                     return (
                         <div>
                             <p>{ comment.comment }</p>
-                            <p>-- { comment.author }, { comment.date }</p>
+                            <p>-- { comment.author }, { 
+                                new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'})
+                                .format(new Date(Date.parse(comment.date)))
+                            }</p>
                         </div>
                     );
                 })
@@ -44,7 +48,7 @@ export default function DishdetailComponent (props) {
                 { renderDish(props.selectedDish) }
               </div>
               <div  className="col-12 col-md-6 m-1">
-                { renderComments(props.selectedDish) }
+                <RenderComments dish={props.selectedDish} />
               </div>
         </div>
     );
