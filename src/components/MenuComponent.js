@@ -1,29 +1,55 @@
-import React from 'react';
-import { Media } from 'reactstrap';
+import React, { useState } from 'react';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
 export default function Menu (props) {
+
+    const [state, setState] = useState({
+        selectedDish: null
+    });
+    
+    const onDishSelect = (dish) => {
+        setState({ selectedDish: dish });
+    }
+
+    const renderDish = (dish) => {
+        if (dish != null)
+            return(
+                <Card>
+                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardBody>
+                      <CardTitle>{dish.name}</CardTitle>
+                      <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+        else
+            return(
+                <div></div>
+            );
+    }
     const menu = props.dishes.map((dish) => {
         return (
-            <div key={dish.id} className="col-12 mt-5">
-                <Media tag="li">
-                    <Media left middle>
-                        <Media object src={dish.image} alt={dish.name} />
-                    </Media>
-                    <Media body className="ml-5">
-                        <Media heading>{dish.name}</Media>
-                        <p>{dish.description}</p>
-                    </Media>
-                </Media>
-            </div>
+          <div  className="col-12 col-md-5 m-1">
+            <Card key={dish.id}
+              onClick={() => onDishSelect(dish)}>
+              <CardImg width="100%" src={dish.image} alt={dish.name} />
+              <CardImgOverlay>
+                  <CardTitle>{dish.name}</CardTitle>
+              </CardImgOverlay>
+            </Card>
+          </div>
         );
     });
 
     return (
         <div className="container">
             <div className="row">
-                <Media list>
-                    {menu}
-                </Media>
+                {menu}
+            </div>
+            <div className="row">
+              <div  className="col-12 col-md-5 m-1">
+                {renderDish(state.selectedDish)}
+              </div>
             </div>
         </div>
     );
