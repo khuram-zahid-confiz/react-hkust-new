@@ -16,7 +16,7 @@ function RenderCard(props) {
   );
 }
 
-function Home(props) {
+export default function Home(props) {
     return(
         <div className="container">
             <div className="row align-items-start">
@@ -33,5 +33,3 @@ function Home(props) {
         </div>
     );
 }
-
-export default Home;
