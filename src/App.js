@@ -7,6 +7,7 @@ import Footer from './components/FooterComponent';
 import Home from './components/HomeComponent';
 import Contact from './components/ContactComponent';
 import Dishdetail from './components/DishdetailComponent';
+import About from './components/AboutComponent';
 import { DISHES } from './shared/dishes';
 import { COMMENTS } from './shared/comments';
 import { PROMOTIONS } from './shared/promotions';
@@ -38,6 +39,7 @@ export default function App () {
             } />
             <Route exact path='/menu' component={ () => <Menu dishes={dishes} /> } />
             <Route exact path='/contactus' component={Contact} />
+            <Route exact path='/aboutus' component={() => <About leaders={leaders} />} />
             <Route path='/menu/:dishId' component={DishWithId} />
             <Redirect to="/home" />
           </Switch>
