@@ -4,14 +4,11 @@ import { NavLink } from 'react-router-dom';
 
 export default function Header () {
     const [isNavOpen, toggleNav] = useState(false);
-    const toggleNav1 = () =>  {
-        toggleNav(!isNavOpen);
-    }
     return(
         <>
             <Navbar dark expand="md">
                 <div className="container">
-                    <NavbarToggler onClick={ () => toggleNav1() } />
+                    <NavbarToggler onClick={ () => toggleNav(!isNavOpen) } />
                     <NavbarBrand className="mr-auto" href="/"><img src='assets/images/logo.png' height="30" width="41" alt='Ristorante Con Fusion' /></NavbarBrand>
                     <Collapse isOpen={ isNavOpen } navbar>
                         <Nav navbar>
