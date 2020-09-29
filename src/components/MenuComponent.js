@@ -4,20 +4,33 @@ import { Link } from 'react-router-dom';
 
 export default function Menu (props) {
 
-    const menu = props.dishes.map((dish) => {
+    const menu = () => {
         return (
-          <div key={dish.id} className="col-12 col-md-5 m-1">
-            <Card>
-                <Link to={`/menu/${dish.id}`} >
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardImgOverlay>
-                        <CardTitle>{dish.name}</CardTitle>
-                    </CardImgOverlay>
-                </Link>
-            </Card>
-          </div>
+            <div></div>
         );
-    });
+    }
+    if(props.leaders != null) {
+        menu = props.dishes.map((dish) => {
+            return (
+            <div key={dish.id} className="col-12 col-md-5 m-1">
+                <Card>
+                    <Link to={`/menu/${dish.id}`} >
+                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardImgOverlay>
+                            <CardTitle>{dish.name}</CardTitle>
+                        </CardImgOverlay>
+                    </Link>
+                </Card>
+            </div>
+            );
+        });
+    }
+
+    const nullView = () => {
+        return (
+            <div></div>
+        );
+    }
 
     return (
         <div className="container">
@@ -32,7 +45,7 @@ export default function Menu (props) {
                 </div>                
             </div>
             <div className="row">
-                {menu}
+                { props.dishes != null ? menu : nullView }
             </div>
         </div>
     );
