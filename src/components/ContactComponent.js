@@ -55,13 +55,14 @@ function Contact(props) {
         else if (touched.lastname && lastname.length > 10)
             errors.lastname = 'Last Name should be <= 10 characters';
 
-        const reg = /^\d+$/;
-        if (touched.telnum && !reg.test(telnum))
+        const reg1 = /^\d+$/;
+        if (touched.telnum && !reg1.test(telnum))
             errors.telnum = 'Tel. Number should contain only numbers';
 
-        if(touched.email && email.split('').filter(x => x === '@').length !== 1)
-            errors.email = 'Email should contain a @';
-
+        const reg2 = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/;
+        if(touched.email && !reg2.test(email))
+            errors.email = 'Email Address is not valid';
+        
         return errors;
     }
 
@@ -81,7 +82,7 @@ function Contact(props) {
             </div>
             <div className="row row-content">
                 <div className="col-12">
-                <h3>Location Information</h3>
+                    <h3>Location Information</h3>
                 </div>
                 <div className="col-12 col-sm-4 offset-sm-1">
                         <h5>Our Address</h5>
