@@ -5,18 +5,19 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
 import { NavLink } from 'react-router-dom';
 
 export default function Header () {
-    const [isNavOpen, toggleNav] = useState(false);
+    const [isNavOpen, toggleNav] = useState(true);
     const [isModalOpen, toggleModal] = useState(false);
     const usernameRef = useRef();
     const passwordRef = useRef();
-    const rememberRef = useRef(false);
+    const rememberRef = useRef();
+
     const handleLogin = (event) => {
         toggleModal(!isModalOpen);
-        alert("Username: " + usernameRef.current + " Password: " + passwordRef.current
-            + " Remember: " + rememberRef.current);
+        alert("Username: " + usernameRef.current.value + " Password: " + passwordRef.current.value
+            + " Remember: " + rememberRef.current.checked);
         event.preventDefault();
-
     }
+
     return(
         <>
             <Navbar dark expand="md">
@@ -62,15 +63,15 @@ export default function Header () {
                     <Form onSubmit={(event) => handleLogin(event)}>
                         <FormGroup>
                             <Label htmlFor="username">Username</Label>
-                            <Input type="text" id="username" name="username" ref={usernameRef} onChange={(event) => usernameRef.current=event.target.value} />
+                            <Input type="text" id="username" name="username" innerRef={usernameRef} />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password">Password</Label>
-                            <Input type="password" id="password" name="password" ref={passwordRef} onChange={(event) => passwordRef.current=event.target.value} />
+                            <Input type="password" id="password" name="password" innerRef={passwordRef} />
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input type="checkbox" name="remember" ref={rememberRef} onChange={(event) => rememberRef.current=event.target.checked} />
+                                <Input type="checkbox" name="remember" innerRef={rememberRef} />
                                 Remember me
                             </Label>
                         </FormGroup>
