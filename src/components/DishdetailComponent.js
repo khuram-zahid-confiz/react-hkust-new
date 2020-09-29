@@ -3,15 +3,22 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbIte
     Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function CommentForm () {
+function CommentForm (props) {
     const [isModalOpen, toggleModal] = useState(false);
     const [errorAuthor, updateFormFeedback] = useState('');
     const ratingRef = useRef();
     const authorRef = useRef();
     const commentRef = useRef();
     const handleSubmit = () => {
-        console.log("Rating: " + ratingRef.current + ", Author: " + authorRef.current + ", Comment: " + commentRef.current);
-        alert("Rating: " + ratingRef.current + ", Author: " + authorRef.current + ", Comment: " + commentRef.current);
+        props.addComment({
+            type: 'ADD_COMMENT',
+            payload: {
+                dishId: props.dish.id,
+                rating: ratingRef.current,
+                author: authorRef.current,
+                comment: commentRef.current
+            }
+        });
         // event.preventDefault();
     }
 
@@ -136,7 +143,7 @@ export default function Dishdetail (props) {
                 </div>
                 <div  className="col-12 col-md-6 m-1">
                     <RenderComments comments={props.comments} />
-                    <CommentForm />
+                    <CommentForm dish={props.dish} addComment={props.addComment} />
                 </div>
             </div>
         </div>
