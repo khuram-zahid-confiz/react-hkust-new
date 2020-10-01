@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Menu from './components/MenuComponent';
@@ -8,22 +8,53 @@ import Home from './components/HomeComponent';
 import Contact from './components/ContactComponent';
 import Dishdetail from './components/DishdetailComponent';
 import About from './components/AboutComponent';
-import { DISHES } from './shared/dishes';
-import { COMMENTS } from './shared/comments';
-import { PROMOTIONS } from './shared/promotions';
-import { LEADERS } from './shared/leaders';
 import { reducer } from './reducers';
+import Axios from 'axios';
 
 export default function App () {
-  const [state, dispatch] = useReducer(reducer, {dishes: null, comments: null, promotions: null, leaders: null});
-  if(state.dishes == null)
-    dispatch({type: 'ADD_DISHES', payload: DISHES});
-  if(state.comments == null)
-    dispatch({type: 'ADD_COMMENTS', payload: COMMENTS});
-  if(state.promotions == null)
-    dispatch({type: 'ADD_PROMOTIONS', payload: PROMOTIONS});
-  if(state.leaders == null)
-    dispatch({type: 'ADD_LEADERS', payload: LEADERS});
+  const dishesTemp = useRef(null);
+  const commentsTemp = useRef(null);
+  const promotionsTemp = useRef(null);
+  const leadersTemp = useRef(null);
+  const freshStart = useRef(true);
+  const [state, dispatch] = useReducer(reducer, {
+    dishes: null, 
+    comments: null, 
+    promotions: null, 
+    leaders: null
+  });
+  
+  useEffect(() => {(
+    async () => {
+      if(dishesTemp.current == null) {
+        const dishesResponse = await Axios.get(`http://localhost:3001/dishes`);
+        dishesTemp.current = dishesResponse.data;
+      }
+      if(commentsTemp.current == null) {
+        const commentsResponse = await Axios.get(`http://localhost:3001/comments`);
+        commentsTemp.current = commentsResponse.data;
+      }
+      if(promotionsTemp.current == null) {
+        const promotionsResponse = await Axios.get(`http://localhost:3001/promotions`);
+        promotionsTemp.current = promotionsResponse.data;
+      }
+      if(leadersTemp.current == null) {
+        const leadersResponse = await Axios.get(`http://localhost:3001/leaders`);
+        leadersTemp.current = leadersResponse.data;
+      }
+      if(freshStart.current) {
+        freshStart.current = false;
+        if(state.dishes == null)
+          dispatch({type: 'ADD_DISHES', payload: dishesTemp.current});
+        if(state.comments == null)
+          dispatch({type: 'ADD_COMMENTS', payload: commentsTemp.current});
+        if(state.promotions == null)
+          dispatch({type: 'ADD_PROMOTIONS', payload: promotionsTemp.current});
+        if(state.leaders == null)
+          dispatch({type: 'ADD_LEADERS', payload: leadersTemp.current});
+      }
+    })();
+  }, []);
 
   const DishWithId = (props) => {
     if(state.dishes != null && state.comments != null)

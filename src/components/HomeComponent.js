@@ -6,7 +6,7 @@ function RenderCard(props) {
   const {item} = props;
   return (
     <Card>
-        <CardImg src={item.image} alt={item.name} />
+        <CardImg src={'http://localhost:3001/' + item.image} alt={item.name} />
         <CardBody>
         <CardTitle>{item.name}</CardTitle>
         {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
