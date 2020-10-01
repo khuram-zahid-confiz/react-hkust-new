@@ -1,33 +1,20 @@
-export const dishReducer = (state, action) => {
-    switch (action.type) {
-      default:
-        return state;
-    }
-}
-  
-export const commentReducer = (state, action) => {
-    switch (action.type) {
-      case 'ADD_COMMENT':
-        var comment = action.payload;
-        comment.id = state.length;
-        comment.date = new Date().toISOString();
-        console.log("Comment: ", comment);
-        return state.concat(comment);
-      default:
-        return state;
-    }
-}
-  
-export const promotionReducer = (state, action) => {
-    switch (action.type) {
-      default:
-        return state;
-    }
-}
-  
-export const leaderReducer = (state, action) => {
-    switch (action.type) {
-      default:
-        return state;
-    }
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD_DISHES':
+      return {...state, dishes: action.payload};
+    case 'ADD_COMMENTS':
+      return {...state, comments: action.payload};
+    case 'ADD_PROMOTIONS':
+      return {...state, promotions: action.payload};
+    case 'ADD_LEADERS':
+      return {...state, leaders: action.payload};
+    case 'ADD_COMMENT':
+      var comment = action.payload;
+      comment.id = state.length;
+      comment.date = new Date().toISOString();
+      console.log("Comment: ", comment);
+      return {...state, comments: [...state.comments, comment]};
+    default:
+      return state;
+  }
 }

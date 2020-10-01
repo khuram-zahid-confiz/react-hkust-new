@@ -12,21 +12,26 @@ import { DISHES } from './shared/dishes';
 import { COMMENTS } from './shared/comments';
 import { PROMOTIONS } from './shared/promotions';
 import { LEADERS } from './shared/leaders';
-import { dishReducer, commentReducer, promotionReducer, leaderReducer } from './reducers';
+import { reducer } from './reducers';
 
 export default function App () {
-  const [dishes, dispatchActionDishes] = useReducer(dishReducer, null);
-  const [comments, dispatchActionComments] = useReducer(commentReducer, null);
-  const [promotions, dispatchActionPromotions] = useReducer(promotionReducer, null);
-  const [leaders, dispatchActionLeaders] = useReducer(leaderReducer, null);
+  const [state, dispatch] = useReducer(reducer, {dishes: null, comments: null, promotions: null, leaders: null});
+  if(state.dishes == null)
+    dispatch({type: 'ADD_DISHES', payload: DISHES});
+  if(state.comments == null)
+    dispatch({type: 'ADD_COMMENTS', payload: COMMENTS});
+  if(state.promotions == null)
+    dispatch({type: 'ADD_PROMOTIONS', payload: PROMOTIONS});
+  if(state.leaders == null)
+    dispatch({type: 'ADD_LEADERS', payload: LEADERS});
 
   const DishWithId = (props) => {
-    if(dishes != null && comments != null)
+    if(state.dishes != null && state.comments != null)
       return (
         <Dishdetail 
-          dish={dishes.filter((dish) => dish.id === parseInt(props.match.params.dishId,10))[0]} 
-          comments={comments.filter((comment) => comment.dishId === parseInt(props.match.params.dishId,10))} 
-          addComment={dispatchActionComments}
+          dish={state.dishes.filter((dish) => dish.id === parseInt(props.match.params.dishId,10))[0]} 
+          comments={state.comments.filter((comment) => comment.dishId === parseInt(props.match.params.dishId,10))} 
+          addComment={dispatch}
         />
       );
     else
@@ -35,13 +40,13 @@ export default function App () {
       );
   };
 
-  const Homepage = (props) => {
-    if(props.dishes != null && props.promotions != null && props.leaders != null)
+  const Homepage = ({dishes, promotions, leaders}) => {
+    if(dishes != null && promotions != null && leaders != null)
       return (
         <Home 
-          dish={props.dishes.filter((dish) => dish.featured)[0]} 
-          promotion={props.promotions.filter((promo) => promo.featured)[0]} 
-          leader={props.leaders.filter((leader) => leader.featured)[0]} 
+          dish={dishes.filter((dish) => dish.featured)[0]} 
+          promotion={promotions.filter((promo) => promo.featured)[0]} 
+          leader={leaders.filter((leader) => leader.featured)[0]} 
         />
       );
     else
@@ -55,10 +60,10 @@ export default function App () {
       <div>
         <Header />
           <Switch>
-            <Route path='/home' component = {() => <Homepage dishes={dishes} promotions={promotions} leaders={leaders} />} />
-            <Route exact path='/menu' component = { () => <Menu dishes={dishes} /> } />
+            <Route path='/home' component = {() => <Homepage {...state} />} />
+            <Route exact path='/menu' component = { () => <Menu dishes={state.dishes} /> } />
             <Route exact path='/contactus' component = {Contact} />
-            <Route exact path='/aboutus' component = {() => <About leaders={leaders} />} />
+            <Route exact path='/aboutus' component = {() => <About leaders={state.leaders} />} />
             <Route path='/menu/:dishId' component = {DishWithId} />
             <Redirect to="/home" />
           </Switch>

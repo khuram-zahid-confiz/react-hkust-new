@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function About(props) {
 
-    const leaders = () => {
+    let leaders = () => {
         return (
             <div></div>
         );

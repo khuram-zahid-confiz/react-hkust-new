@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 export default function Menu (props) {
 
-    const menu = () => {
+    let menu = () => {
         return (
             <div></div>
         );
     }
-    if(props.leaders != null) {
+    if(props.dishes != null) {
         menu = props.dishes.map((dish) => {
             return (
             <div key={dish.id} className="col-12 col-md-5 m-1">
