@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Menu from './components/MenuComponent';
@@ -12,11 +12,6 @@ import { reducer } from './reducers';
 import Axios from 'axios';
 
 export default function App () {
-  const dishesTemp = useRef(null);
-  const commentsTemp = useRef(null);
-  const promotionsTemp = useRef(null);
-  const leadersTemp = useRef(null);
-  const freshStart = useRef(true);
   const [state, dispatch] = useReducer(reducer, {
     dishes: null, 
     comments: null, 
@@ -24,37 +19,17 @@ export default function App () {
     leaders: null
   });
   
-  useEffect(() => {(
-    async () => {
-      if(dishesTemp.current == null) {
-        const dishesResponse = await Axios.get(`http://localhost:3001/dishes`);
-        dishesTemp.current = dishesResponse.data;
-      }
-      if(commentsTemp.current == null) {
-        const commentsResponse = await Axios.get(`http://localhost:3001/comments`);
-        commentsTemp.current = commentsResponse.data;
-      }
-      if(promotionsTemp.current == null) {
-        const promotionsResponse = await Axios.get(`http://localhost:3001/promotions`);
-        promotionsTemp.current = promotionsResponse.data;
-      }
-      if(leadersTemp.current == null) {
-        const leadersResponse = await Axios.get(`http://localhost:3001/leaders`);
-        leadersTemp.current = leadersResponse.data;
-      }
-      if(freshStart.current) {
-        freshStart.current = false;
-        if(state.dishes == null)
-          dispatch({type: 'ADD_DISHES', payload: dishesTemp.current});
-        if(state.comments == null)
-          dispatch({type: 'ADD_COMMENTS', payload: commentsTemp.current});
-        if(state.promotions == null)
-          dispatch({type: 'ADD_PROMOTIONS', payload: promotionsTemp.current});
-        if(state.leaders == null)
-          dispatch({type: 'ADD_LEADERS', payload: leadersTemp.current});
-      }
-    })();
-  }, []);
+  useEffect(() => {
+      Axios.get(`http://localhost:3001/dishes`)
+        .then((dishesResponse)=>{dispatch({type: 'ADD_DISHES', payload: dishesResponse.data})});
+      Axios.get(`http://localhost:3001/comments`)
+        .then((commentsResponse)=>{dispatch({type: 'ADD_COMMENTS', payload: commentsResponse.data})});
+      Axios.get(`http://localhost:3001/promotions`)
+        .then((promotionsResponse)=>{dispatch({type: 'ADD_PROMOTIONS', payload: promotionsResponse.data})});
+      Axios.get(`http://localhost:3001/leaders`)
+        .then((leadersResponse)=>{dispatch({type: 'ADD_LEADERS', payload: leadersResponse.data})});
+    }
+  , []);
 
   const DishWithId = (props) => {
     if(state.dishes != null && state.comments != null)
@@ -75,21 +50,12 @@ export default function App () {
   };
 
   const Homepage = ({dishes, promotions, leaders}) => {
-    if(dishes != null && promotions != null && leaders != null)
-      return (
-        <Home 
-          dish={dishes.filter((dish) => dish.featured)[0]} 
-          promotion={promotions.filter((promo) => promo.featured)[0]} 
-          leader={leaders.filter((leader) => leader.featured)[0]} 
-        />
-      );
-    else
-      return (
-        <div className="col-12">
-            <span className="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></span>
-            <p>Loading . . .</p>
-        </div>
-      );
+    const featuredDish = dishes != null ? dishes.filter((dish) => dish.featured)[0] : null;
+    const featuredPromotion = promotions != null ? promotions.filter((promo) => promo.featured)[0] : null;
+    const featuredLeader = leaders != null ? leaders.filter((leader) => leader.featured)[0] : null;
+    return (
+      <Home dish={featuredDish} promotion={featuredPromotion} leader={featuredLeader} />
+    );
   }
 
   return (
