@@ -136,10 +136,10 @@ export default function Dishdetail (props) {
                 <Breadcrumb>
                     <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
                     <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    <BreadcrumbItem active>{props.dish ? props.dish.name : ''}</BreadcrumbItem>
                 </Breadcrumb>
                 <div className="col-12">
-                    <h3>{props.dish.name}</h3>
+                    <h3>{props.dish ? props.dish.name : ''}</h3>
                     <hr />
                 </div>                
             </div>

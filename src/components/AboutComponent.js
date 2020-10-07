@@ -4,31 +4,35 @@ import { Link } from 'react-router-dom';
 
 function About(props) {
 
-    let leaders = () => {
-        return (
-            <div className="col-12">
-                <span className="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></span>
-                <p>Loading . . .</p>
-            </div>
-        );
-    }
+    let leaders = (
+        <div className="col-12">
+            <span className="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></span>
+            <p>Loading . . .</p>
+        </div>
+    );
 
     if(props.leaders != null) {
-        leaders = props.leaders.map((leader) => {
-            return (
-                <div key={leader.id} className="col-12 mt-5">
-                <Media tag="li">
-                    <Media left middle>
-                        <Media object src={'http://localhost:3001/' + leader.image} alt={leader.name} />
-                    </Media>
-                    <Media body className="ml-5">
-                    <Media heading>{leader.name}</Media>
-                    <p>{leader.description}</p>
-                    </Media>
-                </Media>
-                </div>
-            );
-        });
+        leaders = (
+            <Media list>
+            { 
+                props.leaders.map((leader) => {
+                    return (
+                        <div key={leader.id} className="col-12 mt-5">
+                        <Media tag="li">
+                            <Media left middle>
+                                <Media object src={'http://localhost:3001/' + leader.image} alt={leader.name} />
+                            </Media>
+                            <Media body className="ml-5">
+                            <Media heading>{leader.name}</Media>
+                            <p>{leader.description}</p>
+                            </Media>
+                        </Media>
+                        </div>
+                    );
+                }) 
+            }
+            </Media>
+        );
     }
     
     return(
@@ -86,9 +90,7 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
-                    <Media list>
-                        { leaders }
-                    </Media>
+                    { leaders }
                 </div>
             </div>
         </div>

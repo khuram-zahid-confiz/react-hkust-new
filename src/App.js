@@ -32,21 +32,11 @@ export default function App () {
   , []);
 
   const DishWithId = (props) => {
-    if(state.dishes != null && state.comments != null)
-      return (
-        <Dishdetail 
-          dish={state.dishes.filter((dish) => dish.id === parseInt(props.match.params.dishId,10))[0]} 
-          comments={state.comments.filter((comment) => comment.dishId === parseInt(props.match.params.dishId,10))} 
-          addComment={dispatch}
-        />
-      );
-    else
-      return (
-        <div className="col-12">
-            <span className="fa fa-spinner fa-pulse fa-3x fa-fw text-primary"></span>
-            <p>Loading . . .</p>
-        </div>
-      );
+    const dish = state.dishes != null ? state.dishes.filter((dish) => dish.id === parseInt(props.match.params.dishId,10))[0] : null;
+    const comments = state.comments != null ? state.comments.filter((comment) => comment.dishId === parseInt(props.match.params.dishId,10)) : null;
+    return (
+      <Dishdetail dish={dish} comments={comments} addComment={dispatch} />
+    );
   };
 
   const Homepage = ({dishes, promotions, leaders}) => {
