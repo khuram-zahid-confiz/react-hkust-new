@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useMemo, useReducer } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Menu from './components/MenuComponent';
@@ -18,6 +18,16 @@ export default function App () {
     promotions: null, 
     leaders: null
   });
+
+  const HeaderView = useMemo(()=>{
+    console.log("Header Component rendered");
+    return (<Header />);
+  }, []);
+
+  const FooterView = useMemo(() => {
+    console.log("Footer Component rendered");
+    return (<Footer />);
+  }, []);
   
   useEffect(() => {
       Axios.get(`http://localhost:3001/dishes`)
@@ -51,16 +61,16 @@ export default function App () {
   return (
     <BrowserRouter>
       <div>
-        <Header />
-          <Switch>
-            <Route path='/home' component = {() => <Homepage {...state} />} />
-            <Route exact path='/menu' component = { () => <Menu dishes={state.dishes} /> } />
-            <Route exact path='/contactus' component = {Contact} />
-            <Route exact path='/aboutus' component = {() => <About leaders={state.leaders} />} />
-            <Route path='/menu/:dishId' component = {DishWithId} />
-            <Redirect to="/home" />
-          </Switch>
-        <Footer />
+        {HeaderView}
+        <Switch>
+          <Route path='/home' component = {() => <Homepage {...state} />} />
+          <Route exact path='/menu' component = { () => <Menu dishes={state.dishes} /> } />
+          <Route exact path='/contactus' component = {Contact} />
+          <Route exact path='/aboutus' component = {() => <About leaders={state.leaders} />} />
+          <Route path='/menu/:dishId' component = {DishWithId} />
+          <Redirect to="/home" />
+        </Switch>
+        {FooterView}
       </div>
     </BrowserRouter>
   );
