@@ -1,3 +1,5 @@
+import Axios from "axios";
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD_DISHES':
@@ -12,8 +14,12 @@ export const reducer = (state, action) => {
       var comment = action.payload;
       comment.id = state.length;
       comment.date = new Date().toISOString();
-      console.log("Comment: ", comment);
+      Axios.post('http://localhost:3001/comments/', comment)
+        .then(res => console.log("Comment: ", res.data));
       return {...state, comments: [...state.comments, comment]};
+    case 'DELETE_COMMENT':
+      comment = action.payload;
+      return {...state, comments: state.comments.filter(currentComment => currentComment.id !== comment.id)};
     default:
       return state;
   }
