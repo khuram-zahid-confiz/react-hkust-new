@@ -2,6 +2,7 @@
   "name": "confusion",
   "version": "0.1.0",
   "private": true,
+  "comment": "node version is v12.19.0 and npm version is v6.14.8",
   "dependencies": {
     "@popperjs/core": "^2.5.2",
     "@testing-library/jest-dom": "^4.2.4",
