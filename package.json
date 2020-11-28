@@ -25,7 +25,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "json-server": "cd json-server && json-server --watch db.json -p 3001 -d 2000"
+    "json-server": "cd json-server && json-server --watch db.json -p 3001 -d 2000",
+    "start-json-server": "docker build -t khuramzahid1991/json-server-react -f Dockerfile.server . && docker run -d --name json-server --network=host khuramzahid1991/json-server-react",
+    "stop-json-server": "docker stop json-server && docker rm json-server"
   },
   "eslintConfig": {
     "extends": "react-app"
