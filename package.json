@@ -34,8 +34,8 @@
     "stop-react-client": "docker stop react-client && docker rm react-client",
     "stop-json-server": "docker stop json-server && docker rm json-server",
     "go": "npm run build-json-server && npm run run-json-server && npm run build-react-client && npm run run-react-client",
-    "stop": "npm run stop-react-client && npm run stop-json-server",
     "reset": "docker rmi khuramzahid1991/react-client && docker rmi khuramzahid1991/json-server-confusion",
+    "stop": "npm run stop-react-client && npm run stop-json-server",
     "start-sonarqube": "docker run -d --name sonarqube --stop-timeout 3600 -p 9000:9000 -p 9092:9092 sonarqube"
   },
   "eslintConfig": {
