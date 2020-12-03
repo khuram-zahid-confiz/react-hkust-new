@@ -28,14 +28,11 @@
     "eject": "react-scripts eject",
     "json-server": "cd json-server && json-server --watch db.json -p 3001 -d 2000",
     "build-json-server": "docker build -t khuramzahid1991/json-server-confusion -f Dockerfile.server .",
-    "build-react-client": "docker build -t khuramzahid1991/react-client -f Dockerfile.client .",
     "run-json-server": "docker run -d --name json-server --network=host khuramzahid1991/json-server-confusion",
-    "run-react-client": "docker run -d --name react-client -t --network=host khuramzahid1991/react-client",
-    "stop-react-client": "docker stop react-client && docker rm react-client",
     "stop-json-server": "docker stop json-server && docker rm json-server",
-    "go": "npm run build-json-server && npm run run-json-server && npm run build-react-client && npm run run-react-client",
-    "stop": "npm run stop-react-client && npm run stop-json-server",
-    "reset": "docker rmi khuramzahid1991/react-client && docker rmi khuramzahid1991/json-server-confusion",
+    "confusion-nginx": "npm run build && docker run --name some-nginx -v /home/khuramzahid/Documents/react-hkust-new/build:/usr/share/nginx/html -d -p 3000:80 nginx",
+    "go": "npm run build-json-server && npm run run-json-server && npm run confusion-nginx",
+    "stop": "npm run stop-json-server && docker stop some-nginx && docker rm some-nginx",
     "start-sonarqube": "docker run -d --name sonarqube --stop-timeout 3600 -p 9000:9000 -p 9092:9092 sonarqube"
   },
   "eslintConfig": {
