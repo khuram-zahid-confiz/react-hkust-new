@@ -2,13 +2,12 @@ FROM node:latest
 
 WORKDIR /usr/src/app
 
-RUN npm install -g json-server
-
 COPY ./json-server ./json-server
+
+COPY package*.json ./
+
+RUN npm install -g json-server
 
 EXPOSE 3001
 
 CMD [ "npm", "run", "json-server"]
-
-# docker build -t khuramzahid1991/json-server-confusion -f Dockerfile.server .
-# docker run -d --name json-server --network=host khuramzahid1991/json-server-confusion

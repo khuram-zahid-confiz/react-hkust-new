@@ -2,13 +2,10 @@ FROM node:latest
 
 WORKDIR /usr/src/app
 
-RUN npm install
-
 COPY . .
+
+RUN npm install
 
 EXPOSE 3000
 
 CMD [ "npm", "start"]
-
-# docker build -t khuramzahid1991/react-client -f Dockerfile.client .
-# docker run -d --name json-server --network=host khuramzahid1991/react-client
