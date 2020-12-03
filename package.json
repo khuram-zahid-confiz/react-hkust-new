@@ -30,9 +30,9 @@
     "build-json-server": "docker build -t khuramzahid1991/json-server-confusion -f Dockerfile.server .",
     "run-json-server": "docker run -d --name json-server --network=host khuramzahid1991/json-server-confusion",
     "stop-json-server": "docker stop json-server && docker rm json-server",
-    "confusion-nginx": "npm run build && docker run --name some-nginx -v /home/khuramzahid/Documents/react-hkust-new/build:/usr/share/nginx/html -d -p 3000:80 nginx",
-    "go": "npm run build-json-server && npm run run-json-server && npm run confusion-nginx",
-    "stop": "npm run stop-json-server && docker stop some-nginx && docker rm some-nginx",
+    "confusion-nginx": "npm run build && docker run --name react-nginx -v /home/khuramzahid/Documents/react-hkust-new/build:/usr/share/nginx/html -d -p 3000:80 nginx:alpine",
+    "go": "docker pull khuramzahid1991/json-server-confusion && npm run run-json-server && npm run confusion-nginx",
+    "stop": "npm run stop-json-server && docker stop react-nginx && docker rm react-nginx",
     "start-sonarqube": "docker run -d --name sonarqube --stop-timeout 3600 -p 9000:9000 -p 9092:9092 sonarqube"
   },
   "eslintConfig": {
