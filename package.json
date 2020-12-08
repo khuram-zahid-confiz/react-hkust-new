@@ -28,11 +28,13 @@
     "eject": "react-scripts eject",
     "json-server": "cd json-server && json-server --watch db.json -p 3001 -d 2000",
     "build-json-server": "docker build -t khuramzahid1991/json-server-confusion -f Dockerfile.server .",
+    "build-react-nginx": "npm run build && docker build -t khuramzahid1991/react-nginx-image -f Dockerfile.client .",
     "run-json-server": "docker run -d --name json-server --network=host khuramzahid1991/json-server-confusion",
-    "confusion-nginx": "npm run build && docker run --name react-nginx -v /home/khuramzahid/Documents/react-hkust-new/build:/usr/share/nginx/html -d -p 3000:80 nginx:alpine",
-    "go": "docker pull khuramzahid1991/json-server-confusion && npm run run-json-server && npm run confusion-nginx",
+    "run-react-nginx": "docker run --name react-nginx -d -p 3000:80 khuramzahid1991/react-nginx-image",
+    "go": "npm run run-json-server && npm run run-react-nginx",
     "stop": "docker stop json-server && docker rm json-server && docker stop react-nginx && docker rm react-nginx",
-    "start-sonarqube": "docker run -d --name sonarqube --stop-timeout 3600 -p 9000:9000 -p 9092:9092 sonarqube"
+    "start-sonarqube": "docker run -d --name sonarqube --stop-timeout 3600 -p 9000:9000 -p 9092:9092 sonarqube",
+    "go-minikube": "minikube start && kubectl apply -f json-server-depl.yaml"
   },
   "eslintConfig": {
     "extends": "react-app"

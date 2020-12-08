@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: json-server-depl
+spec:
+  selector:
+    matchLabels:
+      app: json-server-confusion
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: json-server-confusion
+    spec:
+      containers:
+      - name: json-server
+        image: khuramzahid1991/json-server-confusion
+        ports:
+        - containerPort: 3001
