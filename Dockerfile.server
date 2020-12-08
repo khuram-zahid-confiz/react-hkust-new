@@ -1,9 +1,13 @@
+# Alpine is a lightweight distribution of Linux
 FROM node:12.20.0-alpine
 
+# Working directory is where the application will run inside the container. 
 WORKDIR /usr/src/app
 
+# Copying json-server folder from outside the container (host directory) into the working directory inside the container.
 COPY ./json-server ./json-server
 
+# Copies package.json and package-lock.json from host machine into the working directory inside the container. Required for the npm script "json-server".
 COPY package*.json ./
 
 RUN npm install -g json-server
