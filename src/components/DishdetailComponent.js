@@ -3,7 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbIte
 import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentFormComponent';
 import RenderComments from './RenderCommentsComponent';
-import { baseUrl } from './baseUrl';
+import { baseUrl } from '../baseUrl';
 
 export default function Dishdetail (props) {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { baseUrl } from './baseUrl';
+import { baseUrl } from '../baseUrl';
 
 export default function Menu (props) {
 

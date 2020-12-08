@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
     Button, Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { baseUrl } from './baseUrl';
+import { baseUrl } from '../baseUrl';
 
 export default function Header () {
     const [isNavOpen, toggleNav] = useState(true);

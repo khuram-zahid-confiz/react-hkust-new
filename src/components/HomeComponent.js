@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle} from 'reactstrap';
-import { baseUrl } from './baseUrl';
+import { baseUrl } from '../baseUrl';
 
 function RenderCard({dish, promotion, leader}) {
   const item = dish || promotion || leader;

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { baseUrl } from './baseUrl';
+import { baseUrl } from '../baseUrl';
 
 function About(props) {
 
