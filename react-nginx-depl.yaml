@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-nginx-depl
+spec:
+  selector:
+    matchLabels:
+      app: react-nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: react-nginx
+    spec:
+      containers:
+      - name: react-nginx
+        image: khuramzahid1991/react-nginx-image
+        ports:
+        - containerPort: 3000
+        env:
+        - name: JSON_SERVER_URL
+          valueFrom:
+            configMapKeyRef:
+              name: json-server-url-cm
+              key: json-server-url
+---
