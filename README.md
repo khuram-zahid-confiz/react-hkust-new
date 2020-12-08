@@ -18,12 +18,13 @@
 - Make sure that the container is accessible on localhost using --network 
 
 ### "run-react-client"
-"docker run -d --name react-client -p 3000:3000 -t khuramzahid1991/react-client-image"
+"docker run -d --name react-client -p 3000:3000 -t -e JSON_SERVER_URL=\"http://localhost:3001\" khuramzahid1991/react-client-image"
 ## Make sure 'khuramzahid1991/react-client-image' is built on local image repo
 - Run the image in detached mode (not engaging the terminal screen) using -d
 - Provide the running container a name using --name
 - Make sure that the container is accessible on localhost at port 3000
 - Make sure the container stays running using -t
+- Pass in the environment variable to specify JSON server URL
 
 ### "go"
 "npm run run-json-server && npm run build-react-client && npm run run-react-client"

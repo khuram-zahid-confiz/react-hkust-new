@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-nginx-depl
+  name: react-client-depl
 spec:
   selector:
     matchLabels:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: react-nginx
-        image: khuramzahid1991/react-nginx-image
+        image: khuramzahid1991/react-client-image
         ports:
         - containerPort: 3000
         env:

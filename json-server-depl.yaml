@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: json-server
-        image: khuramzahid1991/json-server-confusion
+        image: khuramzahid1991/json-server-image
         ports:
         - containerPort: 3001
 ---

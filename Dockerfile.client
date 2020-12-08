@@ -1,12 +1,14 @@
 FROM node:12.20.0-alpine
 
+ENV JSON_SERVER_URL=http://localhost:3001
+
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN > ./src/baseUrl.js
+CMD ["./updateBaseUrl.sh"]
 
-RUN echo "export const baseUrl = \"http://localhost:3001\";" >> ./src/baseUrl.js
+CMD ["cat", "./src/baseUrl.js"]
 
 RUN npm install
 
