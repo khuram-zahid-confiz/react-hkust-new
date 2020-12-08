@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { baseUrl } from './baseUrl';
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -14,7 +15,7 @@ export const reducer = (state, action) => {
       var comment = action.payload;
       comment.id = state.length;
       comment.date = new Date().toISOString();
-      Axios.post('http://localhost:3001/comments/', comment)
+      Axios.post(`${baseUrl}/comments/`, comment)
         .then(res => console.log("Comment: ", res.data));
       return {...state, comments: [...state.comments, comment]};
     case 'DELETE_COMMENT':

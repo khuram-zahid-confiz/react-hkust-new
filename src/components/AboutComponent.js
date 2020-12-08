@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from './baseUrl';
 
 function About(props) {
 
@@ -67,7 +68,7 @@ function About(props) {
                         <div key={leader.id} className="col-12 mt-5">
                         <Media tag="li">
                             <Media left middle>
-                                <Media object src={'http://localhost:3001/' + leader.image} alt={leader.name} />
+                                <Media object src={`${baseUrl}/` + leader.image} alt={leader.name} />
                             </Media>
                             <Media body className="ml-5">
                             <Media heading>{leader.name}</Media>

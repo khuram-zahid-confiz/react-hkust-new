@@ -10,6 +10,7 @@ import Contact from './components/ContactComponent';
 import Dishdetail from './components/DishdetailComponent';
 import About from './components/AboutComponent';
 import { reducer } from './reducers';
+import { baseUrl } from './baseUrl';
 import Axios from 'axios';
 
 export default function App () {
@@ -31,13 +32,13 @@ export default function App () {
   }, []);
   
   useEffect(() => {
-      Axios.get(`http://localhost:3001/dishes`)
+      Axios.get(`${baseUrl}/dishes`)
         .then((dishesResponse)=>{dispatch({type: 'ADD_DISHES', payload: dishesResponse.data})});
-      Axios.get(`http://localhost:3001/comments`)
+      Axios.get(`${baseUrl}/comments`)
         .then((commentsResponse)=>{dispatch({type: 'ADD_COMMENTS', payload: commentsResponse.data})});
-      Axios.get(`http://localhost:3001/promotions`)
+      Axios.get(`${baseUrl}/promotions`)
         .then((promotionsResponse)=>{dispatch({type: 'ADD_PROMOTIONS', payload: promotionsResponse.data})});
-      Axios.get(`http://localhost:3001/leaders`)
+      Axios.get(`${baseUrl}/leaders`)
         .then((leadersResponse)=>{dispatch({type: 'ADD_LEADERS', payload: leadersResponse.data})});
     }
   , []);

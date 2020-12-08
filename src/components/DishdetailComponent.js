@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbIte
 import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentFormComponent';
 import RenderComments from './RenderCommentsComponent';
+import { baseUrl } from './baseUrl';
 
 export default function Dishdetail (props) {
 
@@ -10,7 +11,7 @@ export default function Dishdetail (props) {
         if (dish != null)
             return(
                 <Card>
-                    <CardImg top src={'http://localhost:3001/' + dish.image} alt={dish.name} />
+                    <CardImg top src={`${baseUrl}/` + dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
                       <CardText>{dish.description}</CardText>
