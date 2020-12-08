@@ -10,8 +10,11 @@ COPY ./json-server ./json-server
 # Copies package.json and package-lock.json from host machine into the working directory inside the container. Required for the npm script "json-server".
 COPY package*.json ./
 
+# Runs inside the container
 RUN npm install -g json-server
 
+# Exposes the port 3001 to be mapped outside the container (not yet mapped to any of the host's ports)
 EXPOSE 3001
 
+# Runs inside the container. Server constantly listens, so that's why the container will continue to live as it will be a non-terminating process.
 CMD [ "npm", "run", "json-server"]
