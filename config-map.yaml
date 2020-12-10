@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: json-server-url-cm
-data:
-  json-server-url: json-server-service
