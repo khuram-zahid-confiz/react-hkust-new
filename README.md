@@ -27,11 +27,10 @@
 - Pass in the environment variable to specify JSON server URL
 
 ### "go"
-"npm run run-json-server && npm run build-react-client && npm run run-react-client"
-## Make sure khuramzahid1991/json-server-image exists on Docker Hub
+"npm run run-json-server && npm run run-react-client"
+## Make sure images exist on Docker Hub if not on local
 ## Can be executed first
 - Runs 'run-json-server' to start the 'json-server' container
-- Build image 'react-client-image' from provided Dockerfile
 - Runs 'run-react-client' to start the 'react-client' container
     
 ### "stop"

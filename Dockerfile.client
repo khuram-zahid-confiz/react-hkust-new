@@ -1,14 +1,12 @@
 FROM node:12.20.0-alpine
 
-ENV JSON_SERVER_URL=http://localhost:3001
+ENV JSON_SERVER_URL=http://localhost:3000
 
 WORKDIR /usr/src/app
 
 COPY . .
 
 CMD ["./updateBaseUrl.sh"]
-
-CMD ["cat", "./src/baseUrl.js"]
 
 RUN npm install
 
