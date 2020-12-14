@@ -58,7 +58,11 @@
 - Run the SonarQube server and create a new project
 - Follow the instructions, download the Sonar Scanner from the provided source (if not already downloaded), and run the command after navigating to the right directory
 
+## "minikube-start"
+"minikube start && kubectl apply -f deployment.yaml"
 
-"minikube-start": "minikube start && kubectl apply -f deployment.yaml",
-"minikube-step2": "minikube service react-client-service",
-"minikube-stop": "kubectl delete -f deployment.yaml && minikube stop"
+## "minikube-step2"
+"minikube service react-client-service"
+
+## "minikube-stop"
+"kubectl delete -f deployment.yaml && minikube stop"
